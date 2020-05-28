@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "AU"
+    }
+  },
+  "defaultProject": "AU",
+  "cli": {
+    "analytics": false
+  }
 }

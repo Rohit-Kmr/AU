@@ -1,1 +1,12 @@
-<p>login-screen works!</p>
+<div>
+    <div class="google-btn">
+        <div class="google-icon-wrapper">
+            <img class="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"/>
+        </div>
+        <p class="btn-text" (click)="signInWithGoogle()" href="/home"><b>Sign in with google</b></p>
+    </div>
+    <p *ngIf="!loggedIn">Waiting for login.....</p>
+    <button *ngIf="loggedIn" (click)="signOut()">sign out</button>
+    <button *ngIf="loggedIn" (click)="putOnConsole()">check user on console</button>
+    
+</div>
