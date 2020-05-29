@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService, GoogleLoginProvider, SocialUser } from '../../../../node_modules/angularx-social-login';
-import { Router } from '@angular/router'
+import { Router, ActivatedRoute } from '@angular/router'
 
 @Component({
   selector: 'app-login-screen',
@@ -10,16 +10,14 @@ import { Router } from '@angular/router'
 
 export class LoginScreenComponent implements OnInit {
 
-  private router: Router;
+  
   private user: SocialUser;
+  private activeRoute: ActivatedRoute;
   loggedIn: Boolean;
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService,private router: Router) { }
 
   ngOnInit(): void {
-    if(this.loggedIn==true)
-    {
-      this.router.navigateByUrl("http://localhost:4200/home");
-    }
+    
     this.authService.authState.subscribe((user)=>{
       this.user = user;
       this.loggedIn = (user != null);
@@ -28,7 +26,10 @@ export class LoginScreenComponent implements OnInit {
   }
   
   signInWithGoogle(): void {
-    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
+    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then(socialUser=> {
+      console.log("hello",SocialUser);  
+      this.router.navigate([`/home`]);
+    });
   }
   signOut(): void {
     this.authService.signOut();
