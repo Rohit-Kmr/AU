@@ -1,0 +1,8 @@
+<div id="header">
+    <img src="../assets/logo.jpg">
+    <div class="menu-button">
+    <button *ngIf="loggedIn" (click)="goToHome()">Home</button>
+    <button *ngIf="loggedIn">Assesment</button>
+    </div>
+    <button id="logout" *ngIf="loggedIn" (click)="signOut()">Log Out</button>
+</div> 
