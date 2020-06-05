@@ -1,0 +1,44 @@
+<div>
+    <form #formData="ngForm" class="view" (ngSubmit)="onSubmit(formData)">
+        <label for="select_course">Course Id :</label>
+        <select id="select_course" name="course_id" (change)="onCourseidChange($event)" ngModel>
+            <option value="null">---</option>
+            <option *ngFor="let course of courses" value="{{course.courseId}}">{{course.courseId}}</option>
+        </select>
+        <br>
+        <h3>Course Details</h3>
+        <label for="course_desc">Course Description :</label>
+        <textarea id="course_desc" readonly>{{coursedata.course_desc}}</textarea>
+        <br>
+        <label for="trainer_id">Trainer Id :</label>
+        <input type="text" id="trainer_id" value="{{coursedata.trainer_id}}" readonly>
+        <label for="trainer_name">Trainer name :</label>
+        <input type="text" id="trainer_name" value="{{coursedata.trainer_name}}" readonly>
+        <br>
+        <label for="skill">Skill :</label>
+        <input type="text" id="skill" value="{{coursedata.skills}}" readonly>
+        <label for="prerequisite">Prerequisite</label>
+        <input type="text" id="prerequisite" value="{{coursedata.prerequisite}}" readonly>
+        <br>
+        <input id="sub" type="submit" value="Get Score">
+    </form>
+    <br>
+    <br>
+    <form class="view">
+        <div *ngFor="let detail of academic let i=index">
+            <label for="assessment_id{{i}}">Trainee id:</label>
+            <input type="text" id="assessment_id{{i}}" value={{detail.candidate_id}} readonly>
+            
+            <label for="assessment_feed{{i}}">feedback :</label>
+            <textarea id="assessment_feed{{i}}" readonly>{{detail.feedback}}</textarea>
+            <br>
+            <label for="score{{i}}">Score:</label>
+            <input type="text" id="score{{i}}" value="{{detail.score}}" readonly>
+
+            <label for="percentile{{i}}">Percentile:</label>
+            <input type="text" id="percentile{{i}}" value="{{detail.percentile}}" readonly>
+            <br>
+            <br>
+        </div>
+    </form>
+</div>

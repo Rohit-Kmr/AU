@@ -1,0 +1,13 @@
+div{
+    width: 500px;
+    margin: auto;
+    text-align: center;
+    overflow: hidden;
+    margin-top: 150px; 
+}
+h1{
+    color: darkcyan;
+}
+span{
+    color: crimson;
+}

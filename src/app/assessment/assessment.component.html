@@ -1,0 +1,20 @@
+<div>
+    <div class="curd">
+        <a *ngIf="userType=='trainer'"href="/addAssessment">create</a>
+    </div>
+    <div>
+        <form class="select_ass" #formData="ngForm" (ngSubmit)="onSubmit(formData)">
+            <!--using l-select2 for searching-->
+            <h3>Search for Assessment</h3>
+            <label for="course_id">Course Id :</label>
+            <l-select2 [(ngModel)]="course_id" [options]='{width:300}' name="course_id" [data]="selectCoursedata" (valueChange)="onCourseidChange($event)"></l-select2>
+            <label for="assessment_id">Assessment Id :</label>
+            <l-select2 [(ngModel)]="assessment_id" [options]='{width:300}' name="assessment_id" [data]="selectAssessmentData"></l-select2>
+            <input id="sub" type="submit" value="Get Assessment">
+        </form>
+    </div>
+    <div class="buttons">
+        <button (click)="goToTrend()">view trends</button>
+        <button (click)="goToScore()">View Total Score</button>
+    </div>
+</div>

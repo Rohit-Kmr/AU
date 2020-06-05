@@ -12,12 +12,26 @@ import { LoginService } from '../login.service';
 export class LoginComponent implements OnInit {
 
   private user:SocialUser;
+   errorlog:string;
 
   constructor(private authService: AuthService,
               private router: Router,
-              private loginService:LoginService) { }
+              private loginService:LoginService) {
+                this.user=null;
+                if(localStorage.getItem("loggedIn")=="true")
+                {
+                  this.router.navigate([`\home`]);
+                }
+                this.errorlog=localStorage.getItem("errormes");
+                localStorage.removeItem("errormes");
+               }
 
   ngOnInit(): void {
+
+    if(localStorage.getItem("loggedIn")=="true")
+    {
+      this.router.navigate([`\home`]);
+    }
     
     this.authService.authState.subscribe((user)=>{
       this.user = user;
@@ -27,7 +41,6 @@ export class LoginComponent implements OnInit {
 
   signInWithGoogle(): void {
     this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then(socialUser=> {
-      console.log("hello",SocialUser);  
 
       this.loginService.getUser(socialUser).subscribe(resp => {
         if(resp!=null)
@@ -39,10 +52,13 @@ export class LoginComponent implements OnInit {
             {
             this.router.navigate([`/home`]);
             }
+            else{
+              if(localStorage.getItem("loggedIn")=="false")
+              { this.errorlog="no user found";}
+            }
           });
         }
         else{
-          alert("no user found");
           this.signOut();
         }
       });
@@ -52,14 +68,5 @@ export class LoginComponent implements OnInit {
     this.authService.signOut();
     this.user=null;
     this.loginService.setLoggedIn(false);
-    this.loginService.isLoggedIn().subscribe(data=>{
-      if(data==true)
-      {
-      this.router.navigate([`/login`]);
-      }
-    });
-  }
-  putOnConsole(): void {
-    console.log(this.user);
   }
 }

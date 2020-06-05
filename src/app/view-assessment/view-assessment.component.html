@@ -1,0 +1,56 @@
+<div>
+    <div class="curd">
+        <a *ngIf="userType=='trainer'" (click)="onDelete()">delete</a>
+        <a *ngIf="userType=='trainer'" (click)="onUpdate()">update</a>
+    </div>
+    <form class="view">
+        <h3>Assessment Details</h3>
+        <label for="Assessment_id">Assessment Id :</label>
+        <input type="text" id="Assessment_id" value="{{data.assessment_id}}" readonly>
+        <label for="Course_id">Course Id:</label>
+        <input type="text" id="Course_id" value="{{data.course_id}}" readonly>
+        <br>
+        <label for="Assessment_type">Assessment Type :</label>
+        <input type="text" id="Assessment_type" value="{{data.assessment_type}}" readonly>
+        <label for="weightage1">Weightage <span *ngIf='data.assessment_type=="Project"'>Build</span> %:</label>
+        <input type="number" id="Weightage1" value="{{data.weightage1}}" readonly>
+        <div *ngIf="data.assessment_type=='Project'">
+        <label for="weightage2">Weightage Process %:</label>
+        <input type="number" id="Weightage2" value="{{data.weightage2}}" readonly>
+        <label for="weightage3">Weightage Test %:</label>
+        <input type="number" id="Weightage3" value="{{data.weightage3}}" readonly>
+        </div>
+        <br>
+        <h3>Course Details</h3>
+        <label for="course_desc">Course Description :</label>
+        <textarea id="course_desc" readonly>{{coursedata.course_desc}}</textarea>
+        <br>
+        <label for="trainer_id">Trainer Id :</label>
+        <input type="text" id="trainer_id" value="{{coursedata.trainer_id}}" readonly>
+        <label for="trainer_name">Trainer name :</label>
+        <input type="text" id="trainer_name" value="{{coursedata.trainer_name}}" readonly>
+        <br>
+        <label for="skill">Skill :</label>
+        <input type="text" id="skill" value="{{coursedata.skills}}" readonly>
+        <label for="prerequisite">Prerequisite</label>
+        <input type="text" id="prerequisite" value="{{coursedata.prerequisite}}" readonly>
+        <br>
+        <h3>Trainee Details</h3>
+        <div *ngFor="let trainee of assessment">
+            <label for="trainee_id">Trainee Id :</label>
+            <input type="text" id="trainee_id" value="{{trainee.trainee_id}}" readonly>
+            <label for="trainee_name">Trainee Name :</label>
+            <input type="text" id="trainee_name" value="{{trainee.trainee_name}}" readonly>
+            <label for="percentage">Percentage <span *ngIf='data.assessment_type=="Project"'>Build</span> :</label>
+            <input type="number" id="percentage" value="{{trainee.percentage1}}" readonly>
+            <div *ngIf="data.assessment_type=='Project'">
+                <label for="percentage2">Percentage Process %:</label>
+                <input type="number" id="percentage2" value="{{trainee.percentage2}}" readonly>
+                <label for="percentage3">Percentage Test %:</label>
+                <input type="number" id="percentage3" value="{{trainee.percentage3}}" readonly>
+            </div>
+            <br>
+            <br>
+        </div>
+    </form>
+</div>

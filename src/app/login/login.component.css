@@ -3,7 +3,9 @@
 .app-login{
     margin: auto;
 }
-
+.loginDiv p{
+	color:red;
+}
 .loginDiv {
     width: 300px;
 	background-color: blueviolet;

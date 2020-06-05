@@ -1,0 +1,56 @@
+.curd{
+    background-color: aliceblue;
+    border-radius: 4px;
+    overflow: hidden;
+    cursor: pointer;
+}
+.curd a{
+    text-decoration:none;
+    float: right;
+    padding: 5px;
+    margin: 5px;
+    border-radius: 10px;
+    background-color: aquamarine;
+    color:#333;
+    display: block;
+}
+.curd a:hover{
+    background-color: rgb(114, 211, 214);
+}
+
+.select_ass{
+    margin-top:10px;
+    margin:auto;
+    overflow: hidden;
+    text-align: center;
+}
+
+.select_ass label{
+    display: inline-block;
+    width: 150px;
+    text-align: center;
+    padding: 5px;
+}
+
+#sub{
+    display: inline-block;
+    text-align: center;
+    margin: auto;
+    padding: 5px;
+    margin-left: 40px;
+    margin-top: 10px;
+}
+
+.buttons{
+    margin-top:50px;
+    width:500px;
+    padding-top:50px;
+    margin:auto;
+    overflow: hidden;
+}
+
+.buttons button{
+    margin-top:50px;
+    margin:auto;
+    margin-left:100px
+}

@@ -15,7 +15,9 @@ export class HeaderComponent implements OnInit {
 
   constructor( private router:Router,
                private authService:AuthService,
-               private loginService:LoginService) { }
+               private loginService:LoginService) { 
+              //this.loggedIn=false;
+               }
 
   ngOnInit(): void {
     this.authService.authState.subscribe((user)=>{
@@ -25,11 +27,14 @@ export class HeaderComponent implements OnInit {
     });
   }
 
-  signOut(): void {
-    this.authService.signOut();
-    this.router.navigate([`login`]);
+  onlogOut(): void {
+    this.loginService.setLoggedIn("false");
+    this.router.navigate([`/login`]);
   }
   goToHome(): void{
     this.router.navigate([`/home`]);
+  }
+  goToAssessment(): void{
+    this.router.navigate([`/assessment`]);
   }
 }

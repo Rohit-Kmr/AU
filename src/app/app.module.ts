@@ -9,6 +9,15 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '../../node_modules/@angular/common/Http';
+import { AssessmentComponent } from './assessment/assessment.component';
+import { ViewAssessmentComponent } from './view-assessment/view-assessment.component';
+import { CourseComponent } from './course/course.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NewAssessmentComponent } from './new-assessment/new-assessment.component';
+import { UpdateAssessmentComponent } from './update-assessment/update-assessment.component';
+import { TrendComponent } from './trend/trend.component';
+import { GoogleChartsModule } from 'angular-google-charts';
+import { LSelect2Module } from 'ngx-select2';
 
 let config = new AuthServiceConfig([
   {
@@ -26,14 +35,24 @@ export function provideConfig(){
     AppComponent,
     HeaderComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    AssessmentComponent,
+    ViewAssessmentComponent,
+    CourseComponent,
+    NewAssessmentComponent,
+    UpdateAssessmentComponent,
+    TrendComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     SocialLoginModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+    GoogleChartsModule,
+    LSelect2Module
   ],
   providers: [
     {

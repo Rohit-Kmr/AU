@@ -1,0 +1,64 @@
+<div>
+    <form class="view" #createform="ngForm" (ngSubmit)="onSubmit(createform)">
+        <h3>Assessment Details</h3>
+        <label for="Assessment_id">Assessment Id :</label>
+        <input type="text" id="Assessment_id" name="assessment_id" [(ngModel)]="data.assessment_id" required>
+        <label for="select_course">Course Id :</label>
+        <select class="select" id="select_course" name="course_id" (change)="onCourseidChange($event)" [(ngModel)]="data.course_id" required>
+            <option value="null">---</option>
+            <option *ngFor="let course of course" value="{{course.courseId}}">{{course.courseId}}</option>
+        </select> 
+        <br>
+        <label for="Assessment_type">Assessment Type :</label>
+        <select class="select" id="Assessment_type" name="assessment_type" (change)="onAssessmentTypeChange($event)" [(ngModel)]="data.assessment_type" required>
+            <option value="null">---</option>
+            <option *ngFor="let item of assessmentType" value="{{item}}">{{item}}</option>
+        </select>
+
+
+        <label for="weightage1">Weightage <span *ngIf="value_assessmentType=='Project'">Build</span> %:</label>
+        <input type="number" min="0" step="0.01" max="100" id="Weightage1" name="Weightage1"  [(ngModel)]="data.weightage1" >
+        <div *ngIf="value_assessmentType=='Project'">
+            <label for="weightage2">Weightage Process %:</label>
+            <input min="0" step="0.01" max="100" type="number" id="Weightage2" name="Weightage2"  [(ngModel)]="data.weightage2">
+            <label for="weightage3">Weightage Test %:</label>
+            <input min="0" step="0.01" max="100" type="number" id="Weightage3" name="Weightage3"  [(ngModel)]="data.weightage3">
+        </div>
+
+
+        <br>
+        <h3>Course Details</h3>
+        <label for="course_desc">Course Description :</label>
+        <textarea id="course_desc" readonly>{{coursedata.course_desc}}</textarea>
+        <br>
+        <label for="trainer_id">Trainer Id :</label>
+        <input type="text" id="trainer_id" value="{{coursedata.trainer_id}}" readonly>
+        <label for="trainer_name">Trainer name :</label>
+        <input type="text" id="trainer_name" value="{{coursedata.trainer_name}}" readonly>
+        <br>
+        <label for="skill">Skill :</label>
+        <input type="text" id="skill" value="{{coursedata.skills}}" readonly>
+        <label for="prerequisite">Prerequisite</label>
+        <input type="text" id="prerequisite" value="{{coursedata.prerequisite}}" readonly>
+        <br>
+        <h3>Trainee Details</h3>
+        <div *ngFor="let trainee of assessment let i=index">
+            <label for="trainee_id">Trainee Id :</label>
+            <input type="text" id="trainee_id" value="{{trainee.trainee_id}}" readonly>
+            <label for="trainee_name">Trainee Name :</label>
+            <input type="text" id="trainee_name" value="{{trainee.trainee_name}}" readonly>
+
+
+            <label for="percentage1">Percentage <span *ngIf='data.assessment_type=="Project"'>Build</span> :</label>
+            <input min="0" step="0.01" max="100" type="number" id="percentage1" name="{{i}}_percentage1"  [(ngModel)]="assessment[i].percentage1">
+            <div *ngIf="data.assessment_type=='Project'">
+                <label for="percentage2">Percentage Process %:</label>
+                <input min="0" step="0.01" max="100" type="number" id="percentage2" name="{{i}}_percentage2"  [(ngModel)]="assessment[i].percentage2" >
+                <label for="percentage3">Percentage Test %:</label>
+                <input min="0" step="0.01" max="100" type="number" id="percentage3" name="{{i}}_percentage3"  [(ngModel)]="assessment[i].percentage3">
+            </div>
+            <br>
+        </div>
+        <input id="sub" type="submit" value="Submit Assessment">
+    </form>
+</div>

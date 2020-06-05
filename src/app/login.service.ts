@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from '../../node_modules/rxjs';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { SocialUser } from '../../node_modules/angularx-social-login';
+import { SocialUser, AuthService } from '../../node_modules/angularx-social-login';
 
 @Injectable({
   providedIn: 'root'
@@ -9,21 +9,38 @@ import { SocialUser } from '../../node_modules/angularx-social-login';
 export class LoginService {
 
   private loggedIn:BehaviorSubject<Boolean>;
+  private log:Boolean;
   private url="http://localhost:8080/Users/getUser/";
 
-  constructor(private http:HttpClient) { 
+  constructor(private http:HttpClient,private authservice:AuthService) { 
     this.loggedIn=new BehaviorSubject<Boolean>(false);
+    localStorage.setItem("loggedIn","not set");
     }
 
   getUser(user:SocialUser): Observable<Object>
   {
-    return this.http.get(this.url+user.email);
+    let data=this.http.get(this.url+user.email);
+    data.subscribe(val => localStorage.setItem("UserData",JSON.stringify(val)));
+    return data;
+  }
+
+  getallUser(): Observable<Object>
+  {
+    let data=this.http.get(this.url);
+    data.subscribe(val => localStorage.setItem("allUserData",JSON.stringify(val)));
+    return data;
   }
 
   setLoggedIn(newValue){
     this.loggedIn.next(newValue);
+    localStorage.setItem("loggedIn",String(newValue));
+    if(newValue=="false")
+    {
+      this.authservice.signOut();
+    }
   }
   isLoggedIn():Observable<Boolean>{
-    return this.loggedIn.asObservable();
+    this.loggedIn.next(localStorage.getItem("loggedIn")=="true"?true:false);
+    return this.loggedIn;
   }
 }
