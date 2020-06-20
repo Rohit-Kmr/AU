@@ -121,7 +121,7 @@ export class CourseComponent implements OnInit {
     this.academic.forEach(val=>{
      // console.log(val.score);
      // console.log(weigthsum);
-      //this.academic[i].score=(val.score/weigthsum)*100;
+    this.academic[i].score=(val.score/weigthsum)*100;
      // console.log(this.academic);
       i++;
     });

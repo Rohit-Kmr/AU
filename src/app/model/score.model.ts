@@ -4,7 +4,4 @@ export class score{
     feedback:string;
     score:number;
     percentile:number;
-    constructor(){
-        this.score=0;
-    }
 }

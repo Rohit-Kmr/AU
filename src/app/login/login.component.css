@@ -4,6 +4,7 @@
     margin: auto;
 }
 .loginDiv p{
+	text-align: center;
 	color:red;
 }
 .loginDiv {

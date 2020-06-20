@@ -9,10 +9,10 @@
         </div>
         <p class="btn-text" (click)="signInWithGoogle()" ><b>Sign in with google</b></p>
     </div>
-  <p>{{errorlog}}</p>
-    <!-- s 
+  <p *ngIf="errorlog">User Not Found</p>
+  <!-- 
     <button *ngIf="loggedIn" (click)="signOut()">sign out</button>
     <button *ngIf="loggedIn" (click)="putOnConsole()">check user on console</button>
+    -->
     </div>
--->
 </div>

@@ -81,7 +81,7 @@ export class NewAssessmentComponent implements OnInit {
       });
     }
   }
-  onSubmit(formData:NgForm){
+  onSubmit(){
       console.log(this.data);
       console.log(this.assessment);
       for (let i=0;i<this.assessment.length;i++)

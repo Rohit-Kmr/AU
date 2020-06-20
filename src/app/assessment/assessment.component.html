@@ -3,7 +3,7 @@
         <a *ngIf="userType=='trainer'"href="/addAssessment">create</a>
     </div>
     <div>
-        <form class="select_ass" #formData="ngForm" (ngSubmit)="onSubmit(formData)">
+        <form name="form" class="select_ass" #formData="ngForm" (ngSubmit)="formData.form.valid && onSubmit(formData)">
             <!--using l-select2 for searching-->
             <h3>Search for Assessment</h3>
             <label for="course_id">Course Id :</label>

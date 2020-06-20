@@ -14,7 +14,7 @@ export class LoginService {
 
   constructor(private http:HttpClient,private authservice:AuthService) { 
     this.loggedIn=new BehaviorSubject<Boolean>(false);
-    localStorage.setItem("loggedIn","not set");
+    //localStorage.setItem("loggedIn","not set");
     }
 
   getUser(user:SocialUser): Observable<Object>

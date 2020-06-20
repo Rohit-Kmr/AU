@@ -10,7 +10,7 @@ import { trend } from '../model/trend.model';
 export class TrendComponent implements OnInit {
 
   data=[];
-  title="trends";
+  title="Trends";
   type="LineChart";
   columnNames=['Year','total_courses','total_assessments','average_score'];
   constructor(private trendService:TrendService) {
@@ -20,7 +20,7 @@ export class TrendComponent implements OnInit {
     this.trendService.getTrend().subscribe((trends)=>{
       let tempData=trends as trend[];
       tempData.forEach((inst)=>{
-        this.data=[...this.data,[inst.year,inst.total_courses,inst.total_assessments,inst.avarage_score]];
+        this.data=[[inst.year,inst.total_courses,inst.total_assessments,inst.avarage_score],...this.data];
       });
     });
 

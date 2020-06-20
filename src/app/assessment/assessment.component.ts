@@ -46,13 +46,16 @@ export class AssessmentComponent implements OnInit {
       console.log(data as course[]);
       this.assessmentdata=data as assessment[];
     });
+    console.log("second:",localStorage.getItem("loggedIn"));
+
+    this.ChangeDetect.detectChanges();
     if(!localStorage.getItem("refresh"))
     {
-      location.reload();
       localStorage.setItem("refresh","true");
+      location.reload();
     }
     else{
-      localStorage.removeItem("refresh");
+          localStorage.removeItem("refresh");
     }
   }
 
@@ -72,10 +75,10 @@ export class AssessmentComponent implements OnInit {
         }
       });
     }
+    this.ChangeDetect.detectChanges();
   }
 
   onSubmit(formdata:NgForm){
-    console.log(formdata);
     console.log(this.assessment_id);
     console.log(this.course_id);
     this.courseData.forEach((val)=>{
@@ -92,7 +95,8 @@ export class AssessmentComponent implements OnInit {
         console.log(localStorage.getItem("assessmentDetails"));
       }
     });
-    this.router.navigate([`/viewAssessment`]);
+    if(this.assessment_id.id!="null")
+    {this.router.navigate([`/viewAssessment`]);}
   }
 
   goToTrend(){

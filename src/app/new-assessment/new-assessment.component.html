@@ -1,5 +1,5 @@
 <div>
-    <form class="view" #createform="ngForm" (ngSubmit)="onSubmit(createform)">
+    <form class="view" #createform="ngForm" (ngSubmit)="onSubmit()">
         <h3>Assessment Details</h3>
         <label for="Assessment_id">Assessment Id :</label>
         <input type="text" id="Assessment_id" name="assessment_id" [(ngModel)]="data.assessment_id" required>
