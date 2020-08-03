@@ -1,7 +1,8 @@
 export class course{
-    course_desc: string;
-    trainer_id: string;
-    trainer_name:string;
+    courseDesc: string;
+    trainerId: string;
+    trainerName:string;
+    courseName:string;
     skills: string;
     prerequisite: string;
     courseId: string;

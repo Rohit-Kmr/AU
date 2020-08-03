@@ -1,39 +1,46 @@
-.curd{
-    background-color: aliceblue;
-    border-radius: 4px;
-    overflow: hidden;
-    cursor: pointer;
+td{
+    width: 150px;
 }
-.curd a{
-    text-decoration: none;
-    float: right;
-    padding: 5px;
-    margin: 5px;
-    border-radius: 10px;
-    background-color: aquamarine;
-    color:#333;
-    display: block;
-}
-.curd a:hover{
-    background-color: rgb(114, 211, 214);
-}
-.allData{
-    margin-top:10px;
-}
-.view{
-    background-color: azure;
-}
-.view label{
-    display: inline-block;
-    width: 180px;
+h2{
+    padding-top: 10px;
     text-align: center;
-    padding: 5px;
-    background-color: turquoise;
+    color:#636363;
 }
-.view h3{
-    padding: 5px;
+.mat-expansion-panel-header{
+    width: 97%;
+}
+table{
+    margin:auto;
     text-align: center;
+    width: 100%;
+    padding: 10px;
 }
-.view input{
-    width:180px;
+.detail-desc{
+    font-style: oblique;
+    font-weight: 900;
+}
+.detail-data{
+    font-style: italic;
+    color:#636363;
+    border-bottom: 1px dashed rgb(57, 153, 132);
+}
+th{
+    background-color: #673ab7;
+    color: #f5f5f5;
+    font-weight: 900;
+}
+.mat-header-cell{
+    text-align: center;
+    font-size: 15px;
+    padding: 0px;
+}
+
+.bottom-space{
+    margin-bottom:100px;
+}
+.viewAssessment{
+    margin: auto;
+    height: 92%;
+    justify-content: center;
+    text-align: center;
 }

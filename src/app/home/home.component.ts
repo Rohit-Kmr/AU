@@ -15,7 +15,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     let data=JSON.parse(localStorage.getItem("UserData"));
     console.log(localStorage.getItem("UserData"));
-    this.title=data.type;
+    this.title=data.type.toUpperCase();
     this.name=data.name;
   }
 

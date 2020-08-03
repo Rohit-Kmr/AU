@@ -5,6 +5,32 @@
         [data]="data"
         [columns]="columnNames"
         [width]=1000
-        [height]=600>
+        [height]=700>
+    </google-chart>
+</div>
+<div class="pie">
+    <google-chart #chart
+        [title]="titleCourse"
+        [type]="type2"
+        [data]="dataCourse"
+        [columns]="columnNamesCourse"
+        [width]=500
+        [height]=350>
+    </google-chart>
+    <google-chart #chart
+        [title]="titleAssessment"
+        [type]="type2"
+        [data]="dataAssessment"
+        [columns]="columnNamesAssessment"
+        [width]=500
+        [height]=350>
+    </google-chart>
+    <google-chart #chart
+        [title]="titleScore"
+        [type]="type2"
+        [data]="dataScore"
+        [columns]="columnNamesScore"
+        [width]=500
+        [height]=350>
     </google-chart>
 </div>

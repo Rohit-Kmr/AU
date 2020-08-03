@@ -1,55 +1,136 @@
-<div>
-    <form class="view" (ngSubmit)="onUpdateForm()">
-        <h3>Assessment Details</h3>
-        <label for="Assessment_id">Assessment Id :</label>
-        <input type="text" id="Assessment_id" value="{{data.assessment_id}}" readonly>
-        <label for="Course_id">Course Id:</label>
-        <input type="text" id="Course_id" value="{{data.course_id}}" readonly>
-        <br>
-        <label for="Assessment_type">Assessment Type :</label>
-        <input type="text" id="Assessment_type" value="{{data.assessment_type}}" readonly>
-        <label for="weightage1">Weightage <span *ngIf='data.assessment_type=="Project"'>Build</span> %:</label>
-        <input type="number" id="Weightage1" name="weightage1" value="{{data.weightage1}}" [(ngModel)]="data.weightage1">
-        <div *ngIf="data.assessment_type=='Project'">
-        <label for="weightage2">Weightage Process %:</label>
-        <input type="number" id="Weightage2" name="weightage2" value="{{data.weightage2}}" [(ngModel)]="data.weightage2">
-        <label for="weightage3">Weightage Test %:</label>
-        <input type="number" id="Weightage3" name="weightage3" value="{{data.weightage3}}" [(ngModel)]="data.weightage3">
+<div class="updateAssessment">
+    <form #formData="ngForm" class="view" (ngSubmit)="formData.valid && onUpdate(formData)">
+        <div class="mat-elevation-z8">
+            <mat-accordion>
+                <h2>Assessment Details</h2>
+                <mat-expansion-panel >
+                    <mat-expansion-panel-header>
+                        <table>
+                            <tr>
+                                <td class="detail-desc">Assessment Name : </td>
+                                <td colspan="3" class="detail-data">  {{data.assessmentName}} </td>
+                            </tr>
+                        </table>
+                    </mat-expansion-panel-header>
+                    <table>
+                        <tr>
+                            <td class="detail-desc">Assessment Type :</td>
+                            <td><span class="detail-data-span">{{data.assessmentType}}</span></td>
+                            <td class="detail-desc">Weightage <span *ngIf='data.assessmentType=="Project"'>Build</span> %:</td>
+                            <td>
+                                <mat-form-field appearance="outline">
+                                    <mat-label for="weightage1">Weightage <span *ngIf='data.assessmentType=="Project"'>Build</span></mat-label>
+                                    <input matInput id="weightage1" name="weightage1" type="number" [(ngModel)]="data.weightage1">
+                                </mat-form-field>
+                            </td>
+                        </tr>
+                        <tr *ngIf="data.assessmentType=='Project'">
+                            <td class="detail-desc">Weightage Process %:</td>
+                            <td>
+                                <mat-form-field appearance="outline">
+                                    <mat-label for="weightage1">Weightage Process</mat-label>
+                                    <input matInput id="weightage2" name="weightage2" type="number" [(ngModel)]="data.weightage2">
+                                </mat-form-field>
+                            </td>
+                            <td class="detail-desc">Weightage Test %:</td>
+                            <td>
+                                <mat-form-field appearance="outline">
+                                    <mat-label for="weightage1">Weightage Test</mat-label>
+                                    <input matInput id="weightage3" name="weightage3" type="number" [(ngModel)]="data.weightage3">
+                                </mat-form-field>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4">
+                                <button mat-raised-button color="accent" id="sub">Update</button>
+                            </td>
+                        </tr>
+                    </table>
+                </mat-expansion-panel>
+            </mat-accordion>
         </div>
         <br>
-        <h3>Course Details</h3>
-        <label for="course_desc">Course Description :</label>
-        <textarea id="course_desc" readonly>{{coursedata.course_desc}}</textarea>
         <br>
-        <label for="trainer_id">Trainer Id :</label>
-        <input type="text" id="trainer_id" value="{{coursedata.trainer_id}}" readonly>
-        <label for="trainer_name">Trainer name :</label>
-        <input type="text" id="trainer_name" value="{{coursedata.trainer_name}}" readonly>
-        <br>
-        <label for="skill">Skill :</label>
-        <input type="text" id="skill" value="{{coursedata.skills}}" readonly>
-        <label for="prerequisite">Prerequisite</label>
-        <input type="text" id="prerequisite" value="{{coursedata.prerequisite}}" readonly>
-        <br>
-        <h3>Trainee Details</h3>
-        <div *ngFor="let trainee of traineeData let i=index">
-            <label for="trainee_id">Trainee Id :</label>
-            <input type="text" id="trainee_id" value="{{trainee.trainee_id}}" readonly>
-            <label for="trainee_name">Trainee Name :</label>
-            <input type="text" id="trainee_name" value="{{trainee.trainee_name}}" readonly>
-            <label for="percentage">Percentage <span *ngIf='data.assessment_type=="Project"'>Build</span> :</label>
-            <input type="number" name="{{i}}_percentage1" id="percentage" value="{{trainee.percentage1}}" [(ngModel)]="traineeData[i].percentage1">
-            <div *ngIf="data.assessment_type=='Project'">
-                <label for="percentage2">Percentage Process %:</label>
-                <input type="number" name="{{i}}_percentage2" id="percentage2" value="{{trainee.percentage2}}" [(ngModel)]="traineeData[i].percentage2">
-                <label for="percentage3">Percentage Test %:</label>
-                <input type="number" name="{{i}}_percentage3" id="percentage3" value="{{trainee.percentage3}}" [(ngModel)]="traineeData[i].percentage3">
-            </div>
- <!--           <label for="percentile">Percentile :</label>
-            <input type="number" id="percentile" value="{{traineeData.percentile}}">
--->           <br>
-            <br>
+        <div class="mat-elevation-z8">
+            <mat-accordion>
+                    <h2>Course Details</h2>
+                    <mat-expansion-panel >
+                        <mat-expansion-panel-header>
+                                    <table>
+                                            <tr>
+                                                <td class="detail-desc">Course Name : </td>
+                                                <td colspan="3" class="detail-data">  {{coursedata.courseName}} </td>
+                                        </tr>
+                                    </table>
+                        </mat-expansion-panel-header>
+                        <table>
+                            <tr>
+                                <td class="detail-desc">Course Description :</td>
+                                <td colspan="3" class="detail-data"> {{coursedata.courseDesc}}</td>
+                            </tr>
+                            <tr>
+                                <td class="detail-desc">Trainer Id :</td>
+                                <td class="detail-data">{{coursedata.trainerId}}</td>
+                                <td class="detail-desc">Trainer name :</td>
+                                <td class="detail-data">{{coursedata.trainerName}}</td>
+                            </tr>
+                            <tr>
+                                <td class="detail-desc">Skill :</td>
+                                <td class="detail-data">{{coursedata.skills}}</td>
+                                <td class="detail-desc">Prerequisite :</td>
+                                <td class="detail-data">{{coursedata.prerequisite}}</td>
+                            </tr>
+                        </table>
+                    </mat-expansion-panel>
+            </mat-accordion>
         </div>
-        <input id="sub" type="submit" value="Update">
+        <br>
+        <br>
+        <div class="mat-elevation-z8 bottom-space">
+                <h2>Trainee Details</h2>
+                <table mat-table [dataSource]="dataSource" >
+            
+                    <ng-container matColumnDef="traineeId">
+                        <th mat-header-cell *matHeaderCellDef> Trainee Id  </th>
+                        <td mat-cell *matCellDef="let element"> {{element.traineeId}} </td>
+                    </ng-container>
+                    
+                    <ng-container matColumnDef="traineeName">
+                        <th mat-header-cell *matHeaderCellDef> Trainee Name </th>
+                        <td mat-cell *matCellDef="let element"> {{element.traineeName}} </td>
+                    </ng-container>
+                    
+                    <ng-container matColumnDef="percentage1">
+                        <th mat-header-cell *matHeaderCellDef> Percentage <span *ngIf="data.assessmentType=='Project'">Build </span>(%) </th>
+                        <td mat-cell *matCellDef="let element; let i=index"> 
+                            <mat-form-field appearance="outline">
+                                    <input matInput name="{{i}}_percentage1" type="number" [(ngModel)]="element.percentage1">
+                            </mat-form-field>
+                        </td>
+                    </ng-container>
+                    
+                    <ng-container *ngIf="data.assessmentType=='Project'" matColumnDef="percentage2">
+                        <th mat-header-cell *matHeaderCellDef> Percentage Process (%) </th>
+                        <td mat-cell *matCellDef="let element let i=index"> 
+                                <mat-form-field appearance="outline">
+                                            <input matInput name="{{i}}_percentage2" type="number" [(ngModel)]="element.percentage2">
+                                </mat-form-field>
+                        </td>
+                    </ng-container>
+
+                    <ng-container *ngIf="data.assessmentType=='Project'" matColumnDef="percentage3">
+                            <th mat-header-cell *matHeaderCellDef> Percentage Test (%) </th>
+                            <td mat-cell *matCellDef="let element let i=index"> 
+                                    <mat-form-field appearance="outline">
+                                                <input matInput name="{{i}}_percentage3" type="number" [(ngModel)]="element.percentage3">
+                                    </mat-form-field>
+                            </td>
+                    </ng-container>
+                    
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>      
+            <mat-paginator [pageSizeOptions]="[1, 2, 10]" showFirstLastButtons></mat-paginator>
+        </div>
     </form>
 </div>

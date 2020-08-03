@@ -1,13 +1,25 @@
 div{
-    width: 500px;
     margin: auto;
-    text-align: center;
+    align-items: center;
     overflow: hidden;
-    margin-top: 150px; 
+    justify-content: center;
+    display: flex;
+    height: 90%;
+    text-align: center;
+}
+img{
+    height: 200px;
+    width: 300px;
 }
 h1{
-    color: darkcyan;
+    color: rgb(38, 38, 167);
 }
-span{
+.name{
     color: crimson;
+}
+.welcome-card{
+    background-color: #b3c1ff; 
+    border-radius: 40px;
+    border: 5px ridge rgb(0, 0, 0);
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.418);
 }

@@ -9,7 +9,7 @@ import { LoginService } from './login.service';
 export class AuthGuard implements CanActivate {
   constructor(private router:Router){}
   canActivate(){
-    //console.log("loggedIn: ",localStorage.getItem("loggedIn"));
+      console.log("loggedIn: ",localStorage.getItem("loggedIn"));
       if(localStorage.getItem("loggedIn")=="true")
       {
         return true;

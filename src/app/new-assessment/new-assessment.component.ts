@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { assessment } from '../model/assessment.model';
 import { course } from '../model/course.model';
 import { trainee } from '../model/trainee.model';
@@ -8,6 +8,9 @@ import { CourseService } from '../course.service';
 import { LoginService } from '../login.service';
 import { AssessmentService } from '../assessment.service';
 import { TraineeService } from '../trainee.service';
+import { MatPaginator } from '../../../node_modules/@angular/material/paginator';
+import { MatTableDataSource } from '../../../node_modules/@angular/material/table';
+import { MatSnackBar } from '../../../node_modules/@angular/material/snack-bar';
 
 @Component({
   selector: 'app-new-assessment',
@@ -17,7 +20,7 @@ import { TraineeService } from '../trainee.service';
 export class NewAssessmentComponent implements OnInit {
 
   data:assessment;
-  course:Array<course>;
+  courses:Array<course>;
   coursedata:course;
   assessment:Array<trainee>;
   assessmentType=[
@@ -28,12 +31,30 @@ export class NewAssessmentComponent implements OnInit {
     'OTHER'
   ];
   text="hello";
-  value_assessmentType:String;
+
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+
+  colProject: string[] = [
+    "traineeId",
+    "traineeName",
+    "percentage1",
+    "percentage2",
+    "percentage3"
+  ];
+
+  colOther: string[]=["traineeId", "traineeName", "percentage1"];
+
+  displayedColumns: string[]=["traineeId", "traineeName", "percentage1"];
+
+  dataSource;
+
+  valueAssessmentType:string;
   
   constructor(private router:Router,private courseService:CourseService, private loginService:LoginService,
-              private assessmentService:AssessmentService,private traineeService:TraineeService) { 
+              private assessmentService:AssessmentService,private traineeService:TraineeService,
+              private snackBar:MatSnackBar) { 
     console.log(this.assessmentType);
-    this.value_assessmentType=null;
+    this.valueAssessmentType=null;
     this.coursedata=new course();
     this.data=new assessment();
     this.assessment= [];
@@ -42,7 +63,7 @@ export class NewAssessmentComponent implements OnInit {
   ngOnInit(): void {
     this.courseService.getAllcourse().subscribe((data)=>{
       console.log(data as course[]);
-      this.course=data as course[];
+      this.courses=data as course[];
     });
     this.loginService.getallUser().subscribe();
     console.log(localStorage.getItem("allUserData"));
@@ -51,30 +72,39 @@ export class NewAssessmentComponent implements OnInit {
       if(val.type=="candidate")
       {
         this.assessment.push(new trainee());
-        this.assessment[index].trainee_name=val.name;
-        this.assessment[index].trainee_id=val.userId;
+        this.assessment[index].traineeName=val.name;
+        this.assessment[index].traineeId=val.userId;
         console.log(index);
         index++;
       }
     });
+    this.dataSource = new MatTableDataSource<trainee>(this.assessment);
+    this.dataSource.paginator = this.paginator;
     console.log(this.assessment);
   }
 
   onAssessmentTypeChange(event:any){
-    if(event.target.value!="null")
+    if(event!="null")
     {
-      console.log(this.value_assessmentType);
-      this.value_assessmentType=event.target.value;
+      console.log(this.valueAssessmentType);
+      this.valueAssessmentType=event;
       
     }
-    console.log(this.value_assessmentType);
+    if(this.valueAssessmentType=="Project")
+    {
+      this.displayedColumns=this.colProject;
+    }
+    else{
+      this.displayedColumns=this.colOther;
+    }
+    console.log(this.valueAssessmentType);
 
   }
   onCourseidChange(event:any){
-    if(event.target.value!="null")
+    if(event!="null")
     {
-      this.course.forEach((val)=>{
-        if(event.target.value==val.courseId)
+      this.courses.forEach((val)=>{
+        if(event==val.courseId)
         {
           this.coursedata=val;
         }
@@ -86,7 +116,7 @@ export class NewAssessmentComponent implements OnInit {
       console.log(this.assessment);
       for (let i=0;i<this.assessment.length;i++)
       {
-        this.assessment[i].assessment_id=this.data.assessment_id;
+        this.assessment[i].assessmentId=this.data.assessmentId;
         console.log(this.assessment[i].percentage2)
         if(this.assessment[i].percentage2==undefined)
         {
@@ -110,6 +140,7 @@ export class NewAssessmentComponent implements OnInit {
       this.assessment.forEach((entry)=>{
         this.traineeService.addTrainee(entry);
       });
-      this.router.navigate([`/assessment`]);
+      this.snackBar.open("Assessment Created",'',{duration: 1000,});
+      setTimeout(()=>{this.router.navigate([`/assessment`]);},1000);
   }
 }

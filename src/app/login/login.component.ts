@@ -43,23 +43,14 @@ export class LoginComponent implements OnInit {
         if(resp!=null)
         {
           this.loginService.setLoggedIn(true);
-          this.loginService.isLoggedIn().subscribe(data=>{
-            if(data==true)
-            {
-            this.router.navigate([`/home`]);
-            }
-          });
+          this.router.navigate([`/home`]);
+          location.reload();
         }
       },(err)=>{
-        
         alert("User Not Found!!!");
-        console.log("hello");
-        this.signOut();
+        this.loginService.setLoggedIn(false);
       });
+      this.ChangeDetect.detectChanges();
     });
-  }
-  signOut(): void {
-    this.authService.signOut();
-    localStorage.removeItem("loggedIn");
   }
 }

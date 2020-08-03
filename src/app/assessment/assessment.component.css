@@ -1,45 +1,58 @@
-.curd{
-    background-color: aliceblue;
-    border-radius: 4px;
-    overflow: hidden;
-    cursor: pointer;
+.Assessment-card{
+    border: 5px;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.418);
+    height: 180px;
+    overflow: visible;
+    background-color: #673ab7;
 }
-.curd a{
-    text-decoration:none;
-    float: right;
-    padding: 5px;
-    margin: 5px;
-    border-radius: 10px;
-    background-color: aquamarine;
-    color:#333;
-    display: block;
+
+.container{
+    margin: auto;
+    margin-top:100px; 
+    display: flex;
+    height: 90%;
+    justify-content: center;
+    text-align: center;
 }
-.curd a:hover{
-    background-color: rgb(114, 211, 214);
+
+.space{
+    margin-top:500px;
+}
+
+.mat-card-title{
+    color: #f5f5f5;
+}
+
+.mat-card-content{
+    margin-top:50px;
 }
 
 .select_ass{
-    margin-top:10px;
     margin:auto;
-    overflow: hidden;
     text-align: center;
 }
 
 .select_ass label{
-    display: inline-block;
-    width: 150px;
+    display: block;
+    width: 100px;
+    margin-left:20px;
     text-align: center;
     padding: 5px;
+    color: #f5f5f5;
+    font-size: 15px;
 }
 
 #sub{
-    display: inline-block;
+    display: block;
     text-align: center;
     margin: auto;
-    padding: 5px;
     margin-left: 40px;
-    margin-top: 10px;
 }
+
+.error-data{
+    color:rgb(255, 155, 155);
+}
+
 
 .buttons{
     margin-top:50px;

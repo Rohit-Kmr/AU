@@ -1,52 +1,50 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:500);
 
-.app-login{
-    margin: auto;
-}
-.loginDiv p{
-	text-align: center;
-	color:red;
-}
 .loginDiv {
-    width: 300px;
-	background-color: blueviolet;
-	box-shadow: 0 3px 4px 0 rgba(0, 0, 0, .25);
-	margin: auto;
-    border-radius: 10px;
-    margin-top: 100px;
-    
-}
-
-#text{
-    overflow: hidden;
-	width: 200px;
-	height: 200px;
     margin: auto;
-    position: relative;
+    align-items: center;
+    overflow: hidden;
+    justify-content: center;
+    display: flex;
+    height: 90%;
+    text-align: center;
 }
 
-.loginDiv h2{
-    margin-top: 30px;
-    text-align: center;
-	color: #fff;
+
+.mat-card{
+	width: 300px;
+	background-color: #b3c1ff; 
+    border-radius: 40px;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.418);
+}
+
+.mat-card-title{
+	color:#673ab7;
+}
+
+.mat-card-content{
+	margin-top:20px;
 }
 
 .google-btn {
+	 display: block;
 	 width: 184px;
 	 height: 42px;
 	 background-color: #4285f4;
-	 border-radius: 2px;
+	 border-radius: 20px;
 	 box-shadow: 0 3px 4px 0 rgba(0, 0, 0, .25);
 	 margin: auto;
 }
  .google-btn .google-icon-wrapper {
-	 position: absolute;
-	 margin-top: 1px;
+	position: absolute;
+	margin-top: 1px;
 	 margin-left: 1px;
 	 width: 40px;
 	 height: 40px;
-	 border-radius: 2px;
+	 border-radius: 20px;
 	 background-color: #fff;
+	 overflow: hidden;
+	 text-align: left;
 }
  .google-btn .google-icon {
 	 position: absolute;

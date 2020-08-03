@@ -1,10 +1,38 @@
-<div class="header">
-    <div class="logo">
-        <img src="../assets/logo.jpg">
-    </div>
-    <div class="nav-list">
-        <a *ngIf="loggedIn" (click)="goToHome()">Home</a>
-        <a *ngIf="loggedIn"(click)="goToAssessment()">Assessment</a>
-        <a id="logout" *ngIf="loggedIn" (click)="onlogOut()">Log Out</a>
-    </div>
-</div> 
+<mat-sidenav-container fullscreen>
+    <mat-sidenav #sidenav>
+        <mat-nav-list>
+            <h2 mat-subheader>Menu</h2>
+            <mat-divider></mat-divider>
+            <a mat-list-item *ngIf="loggedIn" (click)="goToHome()">Home</a>
+            <a mat-list-item *ngIf="loggedIn"(click)="goToAssessment()">Assessment</a>
+            <a mat-list-item *ngIf="loggedIn" (click)="goToTrend()">Trends</a>
+            <a mat-list-item *ngIf="loggedIn" (click)="goToScore()">Total Score</a>
+        </mat-nav-list>
+        <button mat-raised-button class="lastone" *ngIf="userType=='trainer'" (click)="goToAddAssessment()"> Create Assessment</button>
+    </mat-sidenav>
+    <mat-sidenav-content>
+
+        <mat-toolbar color="primary">
+            <mat-toolbar-row>
+
+                <button mat-icon-button (click)="sidenav.toggle()" *ngIf="loggedIn">
+                    <mat-icon >menu</mat-icon>
+                </button>
+
+                <div class="logo">
+                    <img src="../../assets/logo.jpg">
+                </div>
+
+                <span class="menu-spacer"></span>
+
+                <div id="logout" >
+                    <a mat-raised-button color="warn" *ngIf="loggedIn" (click)="onlogOut()">Log Out</a>
+                </div>
+
+            </mat-toolbar-row>
+        </mat-toolbar>
+
+        <router-outlet></router-outlet>
+
+    </mat-sidenav-content>
+</mat-sidenav-container>

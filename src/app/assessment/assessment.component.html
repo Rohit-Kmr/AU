@@ -1,20 +1,43 @@
-<div>
-    <div class="curd">
-        <a *ngIf="userType=='trainer'"href="/addAssessment">create</a>
-    </div>
-    <div>
-        <form name="form" class="select_ass" #formData="ngForm" (ngSubmit)="formData.form.valid && onSubmit(formData)">
-            <!--using l-select2 for searching-->
-            <h3>Search for Assessment</h3>
-            <label for="course_id">Course Id :</label>
-            <l-select2 [(ngModel)]="course_id" [options]='{width:300}' name="course_id" [data]="selectCoursedata" (valueChange)="onCourseidChange($event)"></l-select2>
-            <label for="assessment_id">Assessment Id :</label>
-            <l-select2 [(ngModel)]="assessment_id" [options]='{width:300}' name="assessment_id" [data]="selectAssessmentData"></l-select2>
-            <input id="sub" type="submit" value="Get Assessment">
-        </form>
-    </div>
-    <div class="buttons">
-        <button (click)="goToTrend()">view trends</button>
-        <button (click)="goToScore()">View Total Score</button>
-    </div>
+<div class="container">
+    <mat-card class="Assessment-card">
+        <span class="space"></span>
+        <mat-card-title mat-subheader>Search for Assessment</mat-card-title>
+        <mat-divider [inset]="true"></mat-divider>
+        <mat-card-content>
+            <form name="form" class="select_ass" #formData="ngForm" (ngSubmit)="onSubmit(formData)" >
+                <!--using l-select2 for searching-->
+                <table>
+                    <tr>
+                        <td>
+                            <label for="course_id">Course :</label>
+                        </td>
+                        <td>
+                            <l-select2 [(ngModel)]="courseId" [options]='{width:300, placeholder:"search and select..."}' name="course_id" [data]="selectCoursedata" (valueChange)="onCourseidChange($event)" required><option></option></l-select2>
+                        </td>
+                        <td>
+                            <label for="assessment_id">Assessment :</label>
+                        </td>
+                        <td>
+                            <l-select2 [(ngModel)]="assessmentId" [options]='{width:300, placeholder:"select course id first..."}' name="assessment_id" [data]="selectAssessmentData" (valueChange)="onAssessmentIdChange($event)" required><option></option></l-select2>
+                        </td>
+                        <td>
+                            <button mat-raised-button color="accent" id="sub" type="submit">Get Assessment</button>
+                        </td>
+                    </tr>
+                    <tr class="error-row">
+                        <td>
+                        </td>
+                        <td>
+                            <mat-error class="error-data" *ngIf="error_course==true">Please Select A Course</mat-error>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                            <mat-error class="error-data" *ngIf="error_assessment==true">Please Select A Assessment</mat-error>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </mat-card-content>
+    </mat-card>
 </div>

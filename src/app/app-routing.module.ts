@@ -15,7 +15,7 @@ const routes: Routes = [
   {
     path:"assessment",
     component:AssessmentComponent,
-    //canActivate:[AuthGuard]
+    canActivate:[AuthGuard]
   },
   {
     path:"viewAssessment",
@@ -25,7 +25,7 @@ const routes: Routes = [
   {
     path:"addAssessment",
     component:NewAssessmentComponent,
-   // canActivate:[AuthGuard]
+    canActivate:[AuthGuard]
   },
   {
     path:"updateAssessment",

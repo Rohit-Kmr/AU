@@ -1,6 +1,6 @@
 export class score{
-    course_id:string;
-    candidate_id:string;
+    courseId:string;
+    candidateId:string;
     feedback:string;
     score:number;
     percentile:number;

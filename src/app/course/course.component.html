@@ -1,44 +1,82 @@
-<div>
-    <form #formData="ngForm" class="view" (ngSubmit)="onSubmit(formData)">
-        <label for="select_course">Course Id :</label>
-        <select id="select_course" name="course_id" (change)="onCourseidChange($event)" ngModel>
-            <option value="null">---</option>
-            <option *ngFor="let course of courses" value="{{course.courseId}}">{{course.courseId}}</option>
-        </select>
-        <br>
-        <h3>Course Details</h3>
-        <label for="course_desc">Course Description :</label>
-        <textarea id="course_desc" readonly>{{coursedata.course_desc}}</textarea>
-        <br>
-        <label for="trainer_id">Trainer Id :</label>
-        <input type="text" id="trainer_id" value="{{coursedata.trainer_id}}" readonly>
-        <label for="trainer_name">Trainer name :</label>
-        <input type="text" id="trainer_name" value="{{coursedata.trainer_name}}" readonly>
-        <br>
-        <label for="skill">Skill :</label>
-        <input type="text" id="skill" value="{{coursedata.skills}}" readonly>
-        <label for="prerequisite">Prerequisite</label>
-        <input type="text" id="prerequisite" value="{{coursedata.prerequisite}}" readonly>
-        <br>
-        <input id="sub" type="submit" value="Get Score">
+<div class="courseData">
+    <div class="mat-elevation-z8">
+     <h2>Get Total Score</h2>
+    <form #formData="ngForm" class="view" (ngSubmit)="formData.valid && onSubmit(formData)">
+        <mat-form-field appearance="outline">
+            <mat-label for="select_course">Course </mat-label>
+            <mat-select id="select_course" name="course_id" (ngModelChange)="onCourseidChange($event)" ngModel required>
+                <mat-option value="null">---</mat-option>
+                <mat-option *ngFor="let course of courses" value="{{course.courseId}}">{{course.courseName}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="formData.controls.course_id.errors?.required==true && formData.submitted==true">Please choose a course</mat-error>
+        </mat-form-field> 
+        <button mat-raised-button color="accent" id="sub" type="submit">Get Score</button>
     </form>
+    </div>
     <br>
     <br>
-    <form class="view">
-        <div *ngFor="let detail of academic let i=index">
-            <label for="assessment_id{{i}}">Trainee id:</label>
-            <input type="text" id="assessment_id{{i}}" value={{detail.candidate_id}} readonly>
-            
-            <label for="assessment_feed{{i}}">feedback :</label>
-            <textarea id="assessment_feed{{i}}" readonly>{{detail.feedback}}</textarea>
-            <br>
-            <label for="score{{i}}">Score:</label>
-            <input type="text" id="score{{i}}" value="{{detail.score}}" readonly>
+    <div class="mat-elevation-z8">
+    <mat-accordion>
+            <h2>Course Details</h2>
+            <mat-expansion-panel >
+                <mat-expansion-panel-header>
+                            <table>
+                                <tr>
+                                    <td class="detail-desc">Course Name : </td>
+                                    <td colspan="3" class="detail-data">  {{coursedata.courseName}} </td>
+                                </tr>
+                            </table>
+                </mat-expansion-panel-header>
+                <table>
+                    <tr>
+                        <td class="detail-desc">Course Description :</td>
+                        <td colspan="3" class="detail-data"> {{coursedata.courseDesc}}</td>
+                    </tr>
+                    <tr>
+                        <td class="detail-desc">Trainer Id :</td>
+                        <td class="detail-data">{{coursedata.trainerId}}</td>
+                        <td class="detail-desc">Trainer name :</td>
+                        <td class="detail-data">{{coursedata.trainerName}}</td>
+                    </tr>
+                    <tr>
+                        <td class="detail-desc">Skill :</td>
+                        <td class="detail-data">{{coursedata.skills}}</td>
+                        <td class="detail-desc">Prerequisite :</td>
+                        <td class="detail-data">{{coursedata.prerequisite}}</td>
+                    </tr>
+                </table>
+            </mat-expansion-panel>
+    </mat-accordion>
+    </div>
+    <br>
+    <br>
+  <div class="mat-elevation-z8 bottom-space" [hidden]="academic.length==0">
+    <h2>Trainee Details</h2>
+    <table mat-table [dataSource]="dataSource" >
 
-            <label for="percentile{{i}}">Percentile:</label>
-            <input type="text" id="percentile{{i}}" value="{{detail.percentile}}" readonly>
-            <br>
-            <br>
-        </div>
-    </form>
+        <ng-container matColumnDef="candidateId">
+          <th mat-header-cell *matHeaderCellDef> Candidate Id </th>
+          <td mat-cell *matCellDef="let element"> {{element.candidateId}} </td>
+        </ng-container>
+      
+        <ng-container matColumnDef="feedback">
+          <th mat-header-cell *matHeaderCellDef> Feedback </th>
+          <td mat-cell *matCellDef="let element"> {{element.feedback}} </td>
+        </ng-container>
+      
+        <ng-container matColumnDef="score">
+          <th mat-header-cell *matHeaderCellDef> Score </th>
+          <td mat-cell *matCellDef="let element"> {{element.score}} </td>
+        </ng-container>
+      
+        <ng-container matColumnDef="percentile">
+          <th mat-header-cell *matHeaderCellDef> Percentile </th>
+          <td mat-cell *matCellDef="let element"> {{element.percentile}} </td>
+        </ng-container>
+      
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>      
+    <mat-paginator [pageSizeOptions]="[1, 2, 10]" showFirstLastButtons></mat-paginator>
+    </div>
 </div>

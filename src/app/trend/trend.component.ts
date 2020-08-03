@@ -10,17 +10,32 @@ import { trend } from '../model/trend.model';
 export class TrendComponent implements OnInit {
 
   data=[];
+  dataCourse=[];
+  titleCourse="Course Trends";
+  dataAssessment=[];
+  titleAssessment="Assessment Trends";
+  dataScore=[];
+  titleScore="Score Trends";
   title="Trends";
   type="LineChart";
-  columnNames=['Year','total_courses','total_assessments','average_score'];
+  type2="PieChart";
+  columnNames=['Year','Total Courses','Total Assessments','Average Score'];
+  columnNamesCourse=['Year','Total Courses'];
+  columnNamesAssessment=['Year','Total Assessments'];
+  columnNamesScore=['Year','Average Score'];
   constructor(private trendService:TrendService) {
    }
 
   ngOnInit(): void {
     this.trendService.getTrend().subscribe((trends)=>{
       let tempData=trends as trend[];
+      console.log(tempData);
       tempData.forEach((inst)=>{
-        this.data=[[inst.year,inst.total_courses,inst.total_assessments,inst.avarage_score],...this.data];
+        this.data=[[inst.year,inst.totalCourses,inst.totalAssessments,inst.averageScore],...this.data];
+        this.dataCourse=[[inst.year,inst.totalCourses],...this.dataCourse];
+        this.dataAssessment=[[inst.year,inst.totalAssessments],...this.dataAssessment];
+        this.dataScore=[[inst.year,inst.averageScore],...this.dataScore];
+        console.log(this.data);
       });
     });
 
